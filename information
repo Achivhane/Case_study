@@ -1,0 +1,39 @@
+single page Application
+
+Loading one component to another component without refreshing the whole webpage is called single page Application
+movement of one componentto another component in single page Application is called routing
+ routingModule is the predefined module, used to 
+
+
+ steps of  single page  Application:
+ 1) Create angular Application
+ ng new spa-Application
+  where spa-app is the angular Application
+  
+2)switch to the angular Application
+
+cd spa-app
+
+====================================================
+ spa-app
+    src
+      app
+        main.component.ts
+        main.component.html
+
+        mean.component.ts
+        mean.component.html
+
+        mern.component.ts
+        mern.component.html
+
+        mevn.component.ts
+        mevn.component.html
+        
+        app.module.ts----->registration module
+        
+        index.html
+
+==========================================
+where "mainComponent" is the master 
+and "meanComponent" , "mernComponent", "mevnComponent" are the child

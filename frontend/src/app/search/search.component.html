@@ -1,0 +1,40 @@
+<div class="container-fluid">
+<h3>search Trains</h3>
+
+<form class="form-inline" [formGroup]="SearchData">
+    <div class="form-group">
+      <label class="sr-only" for="inputOne">FROM:</label>
+      <input type="text" class="form-control" id="from" placeholder="select city" formControlName="from">
+    </div><br><br>
+    <div class="form-group">
+      <label class="sr-only" for="inputTwo">TO: </label>
+      <input type="text" class="form-control" id="to" placeholder="Select city" formControlName="to">
+    </div><br><br>
+    <button type="submit" class="btn btn-default" (click)="searchNewTrain()">Search</button>
+  </form>
+<br><br><br>  
+<h4>TRAIN DETAILS</h4>
+<div class="d-flex justify-content-center">
+<div class="spinner-border" role="status" >
+  <table class="table">
+    <tr>
+      <th>Train ID</th>
+        <th>Train Name</th>
+        <th>From</th>
+        <th>TO</th>
+        <th>Action</th>
+    </tr>
+    <tbody>
+    <tr *ngFor='let t of trains'>
+       <td>{{t._id}}</td>
+        <td>{{t.train_name}}</td>
+        <td>{{t.from}}</td>
+        <td>{{t.to}}</td>
+        <td><button class="btn btn-danger" (click)="updateTicket(t._id)">BOOK TICKET</button></td>
+      </tr>
+  </tbody>
+  
+  </table>
+</div>
+</div>
+</div>

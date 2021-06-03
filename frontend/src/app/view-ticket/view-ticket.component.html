@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <h1>Your ticket has been booked ,Please find below details </h1>
+  
+  <form>
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status" >
+        <table class="table">
+          <tr>
+            <th>Train ID</th>
+              <th>Train Name</th>
+              <th>From</th>
+              <th>TO</th>
+              <th>Departure Time</th>
+              <th>Arrival Time</th>
+              <th>FARE</th>
+          </tr>
+          <tbody>
+          <tr>
+             <td>{{ticket._id}}</td>
+              <td>{{ticket.train_name}}</td>
+              <td>{{ticket.from}}</td>
+              <td>{{ticket.to}}</td>
+              <td>{{ticket.departure_time}}</td>
+              <td>{{ticket.arrival_time}}</td>
+              <td>{{ticket.fare}}</td>
+            
+            </tr>
+        </tbody>
+        
+        </table>
+      </div>
+      </div>
+  </form>
+  </div>
