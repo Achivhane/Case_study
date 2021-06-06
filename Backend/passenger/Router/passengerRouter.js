@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const Passenger = require('../model/passenger');
+const expressAsyncHandler = require("express-async-handler");
+const generateToken = require("../createToken");
+
 //get request
  
 router.get('/passengers',function(req, res) {
@@ -22,22 +25,63 @@ router.post('/register',(req, res)=>{
 
     
     console.log("inside reg post");
-    // Output the book to the console for debugging
+   
     console.log(reg);
-   // Passenger.push(register);
+  
    reg.save(function(err) {
     if (err)
     {
-        console.log("testing rest1");
+        console.log("testing rest1"+err);
         res.send(err);
     }
     else
     {
         console.log("no issue");
-        res.send('new passenger is added to the database');
+        res.json('new passenger is added to the database');
     }
 });
 });
+
+router.post("/users/registration", expressAsyncHandler(async (req,res)=>{
+    //read the data from client application and match with Modal
+    const user = new Passenger({
+        name : req.body.name,
+        email : req.body.email,
+        password : req.body.password
+    });
+    const createdUser = await user.save();
+    res. send({
+        _id :  createdUser._id,
+        name : createdUser.name,
+        email : createdUser.email,
+        token : generateToken(createdUser)
+    })
+}));
+
+
+router.post("/users/signin",expressAsyncHandler(async (req,res)=>{
+    const user = await Passenger.findOne({"email":req.body.email});
+    console.log(user);
+    console.log(" req.body.password"+req.body.password);
+    console.log(" req.body.password"+req.body.password);
+    if(user){
+        if(req.body.password===user.password){
+            console.log("into this")
+            routes = "/user";
+            res.send({
+                _id:user._id,
+                name:user.name,
+                email:user.email,
+                route:routes,
+                token : generateToken(user)
+            })
+        }else{
+            res.status(401).send({"message":"invalid password"});
+        }
+    }else{
+        res.status(401).send({"message":"invalid email or password"})
+    }
+}));
 
 //post request for login data
 router.post("/login",(req, res)=>{
@@ -45,29 +89,15 @@ router.post("/login",(req, res)=>{
     const body=req.body
     const email=body.email
     const password = body.password
-    login.save(function(err) {
-            if (err)
-            {
-                console.log("testing rest1");
-                res.send(err);
-            }
-            else
-            {
-                console.log("no issue");
-                res.send('new passenger is added to the database');
-            }
-        });
-
-//if passenger details found or not found
  Passenger.findOne({email:email,password:password},(err,found)=>{
       if(found){
           console.log(found);
-          res.json({“message” : "successfully authenticated" , email : email })
-          
-         res.json("successful");
+          routes = "/search";
+         res.json(1);
      }
      else{
-         res.send("unauthorized");
+        res.json("localhost:4200/admin");
+
      }
  });    
 });
@@ -114,5 +144,16 @@ router.delete('/passengers/:_id', function(req, res) {
         }
 	});
 });
-//router.use('/api', router);
+ router.get('/passengers/:id',  function(req, res) {
+	console.log("id is :"+req.params.id)
+	 Passenger.findById(req.params.id).then((user)=>{
+        if(user){
+           res.json(user);
+        }else{
+            res.json("invalid train id");
+                }
+    });
+
+});
+router.use('/api', router);
 module.exports = router;

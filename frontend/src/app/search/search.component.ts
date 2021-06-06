@@ -10,7 +10,8 @@ import {SearchServiceService} from './search-service.service'
 })
 export class SearchComponent implements OnInit {
   
-  
+  from:any;
+  to:any
 
   SearchData = new FormGroup({
     from:new FormControl(''),
@@ -44,11 +45,17 @@ export class SearchComponent implements OnInit {
 }
 
 updateTicket(id:any){
-  console.log("id bhetla"+id)
+  console.log("id "+id)
   this.router.navigate(['booking',id])
 }
 booking(){
   this.router.navigateByUrl('booking');
+}
+
+
+validateSearch()
+{
+console.log("heheheh")
 }
 
   }

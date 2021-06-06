@@ -16,8 +16,8 @@ var PassengerSchema = new Schema({
         unique:true
     },
     mobile_number:{
-        type:Number,
-        unique:true
+        type:Number
+        // unique:true
     }
 })
 

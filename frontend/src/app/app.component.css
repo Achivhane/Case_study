@@ -1,11 +1,4 @@
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 10px;
-  background-color: gray;
-  color: white;
-  text-align: center;
+.navbar_navbar-default{
+background-color: rgb(159, 216, 238);
 }

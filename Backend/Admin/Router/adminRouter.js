@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Admin = require('../model/admin');
 
-
 // get request for trains details
 router.get('/TrainDetails',function(req, res) {
     Admin.find(function(err, details) {
@@ -41,23 +40,55 @@ router.post('/admin',(req, res)=>{
 });
 });
 
-router.get('/passengers/:id',(res, req)=>{
-    Passenger.findById(req.params.id).then((Passenger)=>{
-        if(cart){
-            //make req to passengerto get id
-            axios
-            .get("http://localhost:5000/api/passengers" +Passenger.PassengerId)
-            .then((response)=>{
-                var data ={
-                    name:response.data.name,
-                    email:response.data.email,
-                    password:response.data.password
-                }
-                res.json(data);
-                console.log(data);
-            });
+router.post("/search",(req, res)=>{
+    var login = Admin();
+    const body=req.body
+    const from=body.from
+    const to = body.to
+    login.save(function(err) {
+            if (err)
+            {
+                console.log("testing rest1");
+                res.send(err);
+            }
+            else
+            {
+                console.log("no issue");
+        //         res.send('new passenger is added to the database');
+        // //     }
+        // // });
+
+//if passenger details found or not found
+ Admin.find({from:from, to:to},(err,found)=>{
+      if(found){
+          console.log(found);
+         res.json(found);
+     }
+     else{
+         res.send("No Trains Found");
+     }
+ });    
+};
+})
+})
+ router.get('/booking/:id',  function(req, res) {
+	console.log("id is :"+req.params.id)
+	 Admin.findById(req.params.id).then((train)=>{
+        if(train){
+           res.json(train);
         }else{
-            res.send("invalid product");
+            res.send("invalid train id");
+                }
+    });
+
+});
+router.get('/train/:_id',(res, req)=>{
+    console.log("trains "+req.params.id);
+    Admin.findById(req.params.id).then((train)=>{
+        if(trainDetailstrain){
+           res.json(train);
+        }else{
+            res.send("invalid train id");
                 }
     });
 });

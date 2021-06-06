@@ -10,7 +10,7 @@ const baseUrl='http://localhost:7000/api/booking';
 export class PassengerServiceService {
   //endpoint api for register
   private register = 'http://localhost:5000/api/register'; 
-  private login = 'http://localhost:5000/api/login';
+  private login = 'http://localhost:5000/api/login'; 
 
   constructor(private http: HttpClient) {}
   
@@ -18,7 +18,7 @@ export class PassengerServiceService {
     console.log("inside LoginUser");
       console.log(data);
     //return this.http.post(this.login, data);
-    return this.http.post("http://localhost:5000/api/login", data, {responseType:'text' as 'json'})
+    return this.http.post("http://localhost:5000/api/users/signin", data, {responseType:'text' as 'json'})
 
   }
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //Routing to each component
+//import { LoginComponent} from './login/login.component'
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './passenger/login/login.component';
 import { AdminComponent } from './admin/admin.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent },
   {path: 'home', component: HomeComponent },
   {path: 'login', component: LoginComponent},
+  {path: 'register', component:RegistrationComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'updatetrain/:id', component: BookingComponent},
@@ -24,6 +26,7 @@ const routes: Routes = [
   {path: 'search', component: SearchComponent},
 {path: 'view/:id', component: ViewTicketComponent},
 {path: 'viewticket', component: ViewTicketComponent}
+
 
   
 ];

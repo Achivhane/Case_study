@@ -16,9 +16,9 @@ import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { RegistrationComponent } from './passenger/registration/registration.component';
 import { TestComponent } from './search/test/test.component';
-import { AuthService } from './passenger/login/auth.service';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
-import { TestingComponent } from './testing/testing.component';
+
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -35,7 +35,8 @@ import { TestingComponent } from './testing/testing.component';
     RegistrationComponent,
     TestComponent,
     ViewTicketComponent,
-    TestingComponent
+    
+    FooterComponent
     
   ],
   imports: [
@@ -45,7 +46,7 @@ import { TestingComponent } from './testing/testing.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [RegistrationComponent,AuthService],
+  providers: [RegistrationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

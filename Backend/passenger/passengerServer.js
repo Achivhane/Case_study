@@ -5,14 +5,14 @@ const cors = require('cors');
 var app = express();
 
 // // connect to our database
-mongoose.connect('mongodb+srv://admin:admin@cluster0.d36b8.mongodb.net/Passenger?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true }); 
+mongoose.connect('mongodb+srv://admin:admin@cluster0.d36b8.mongodb.net/Passengers1?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true }); 
 app.use(express.json());
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true
-}));
-app.use(bodyParser.json());
 
-const passenger = require('../passenger/model/passenger')
+app.use(cors());
+
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
+const passenger = require('../passenger/Router/passengerRouter')
 
 app.use(passenger);
 
@@ -22,6 +22,6 @@ app.use(function(req, res, next) {
     next(); // make sure we go to the next routes and don't stop here
 });
 
-var port = process.env.PORT || 5003; 
+var port = process.env.PORT || 5000; 
 app.listen(port);
 console.log('Server Listening on port ' + port);

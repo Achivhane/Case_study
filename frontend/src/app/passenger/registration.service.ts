@@ -10,6 +10,6 @@ export class RegistrationService {
 
   public doRegistration(user:any)
   {
-    return this.http.post("http://localhost:5000/api/register", user, {responseType:'text' as 'json'})
+    return this.http.post("http://localhost:5000/api/users/registration", user, {responseType:'text' as 'json'})
   }
 }
