@@ -1,40 +1,63 @@
 <div class="container-fluid">
-<h3>search Trains</h3>
+    <body>
+        <header>
+            <h1 class="hd">Railway Reservation System</h1>
+            <div class="home">
+                <p class="menu"><a href="userhome" routerLink="/search" routerLinkActive="active">Home</a></p>
+            </div>
+            <div class="home">
+                <p class="menu"><a href="userviewtrainfwd" routerLink="/viewbookticket" routerLinkActive="active">View
+                        Ticket</a></p>
+            </div>
+            <!-- <div class="home">
+                <p class="menu"><a href="userprofile"routerLink="/profile" routerLinkActive="active">Profile</a></p>
+            </div> -->
+            <div class="home">
+                <p class="menu"><a href="userlogout" routerLink="/login" routerLinkActive="active">Logout</a></p>
+            </div>
+        </header>
+        <div class="tab">
+            <h1 class="menu1">Search Trains</h1>
+        </div>
+        <br>
+        <form class="tab red" [formGroup]="SearchData">
+            <div>
+                From Station: <input type="text" id="from" placeholder="Enter Source Station"
+                    formControlName="from"><br /><br />
+            </div>
+            <div>
+                To Station: &nbsp; &nbsp;&nbsp;<input type="text" id="to" placeholder="Enter Destination Station"
+                    formControlName="to"><br />
+            </div><br>
+            <div>
+                <label for="departure">Date:&nbsp;&nbsp;</label>
+                <input type="date" id="date" formControlName="date" min={{date}} required />
+            </div><br>
+            <button type="submit" class="btn btn-default" [disabled]="!SearchData.valid"(click)="searchNewTrain()">Search</button><br />
+        </form><br />
+        <div *ngIf="trains.length>0">
+            <table class="tab red">
+                <tr>
+                    <th>Train ID</th>
+                    <th>Train Name</th>
+                    <th>From</th>
+                    <th>TO</th>
+                    <th>Action</th>
 
-<form class="form-inline" [formGroup]="SearchData">
-    <div class="form-group">
-      <label class="sr-only" for="inputOne">FROM:</label>
-      <input type="text" class="form-control" id="from" placeholder="select city" formControlName="from">
-    </div><br><br>
-    <div class="form-group">
-      <label class="sr-only" for="inputTwo">TO: </label>
-      <input type="text" class="form-control" id="to" placeholder="Select city" formControlName="to">
-    </div><br><br>
-    <button type="submit" class="btn btn-default" (click)="searchNewTrain()">Search</button>
-  </form>
-<br><br><br>  
-<h4>TRAIN DETAILS</h4>
-<div class="d-flex justify-content-center">
-<div class="spinner-border" role="status" >
-  <table class="table">
-    <tr>
-      <th>Train ID</th>
-        <th>Train Name</th>
-        <th>From</th>
-        <th>TO</th>
-        <th>Action</th>
-    </tr>
-    <tbody>
-    <tr *ngFor='let t of trains'>
-       <td>{{t._id}}</td>
-        <td>{{t.train_name}}</td>
-        <td>{{t.from}}</td>
-        <td>{{t.to}}</td>
-        <td><button class="btn btn-danger" (click)="updateTicket(t._id)">BOOK TICKET</button></td>
-      </tr>
-  </tbody>
-  
-  </table>
-</div>
-</div>
+                </tr>
+                <tbody>
+                    <tr *ngFor='let t of trains'>
+                        <td>{{t._id}}</td>
+                        <td>{{t.train_name}}</td>
+                        <td>{{t.from}}</td>
+                        <td>{{t.to}}</td>
+                        <td><button class="btn btn-danger" (click)="updateTicket(t._id)">BOOK TICKET</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="trains.msg">
+            <div class="tab red"> no train available for this route</div>
+        </div>
+    </body>
 </div>

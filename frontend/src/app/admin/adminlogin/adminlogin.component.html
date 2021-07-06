@@ -1,0 +1,32 @@
+<body>
+    <div class="login">
+        <div class="card-header">
+            <h1><b>Login</b></h1>
+        </div>
+        <div class="card-body">
+
+            <form #login='ngForm' (ngSubmit)='onSubmit(login)'>
+                <div id="login" ngModelGroup #login='ngModelGroup'>
+
+                    <div class="form-group">
+                        <input type="text" id="email" class="form-control" ngModel name="email" required email
+                            #email='ngModel' placeholder="Email">
+                        <span class="help-block" *ngIf='!email.valid && email.touched'></span>
+
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="password" id="password" class="form-control" ngModel name="password" required
+                            #password='ngModel' placeholder="Password">
+                        <span class="help-block" *ngIf='!password.valid && password.touched'></span>
+                    </div>
+                </div>
+                <br>
+                <div class="submit">
+                    <button id="submit" class="btn btn-outline-primary" type="submit" [disabled]='!login.valid'
+                        (click)='addtrain'>Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

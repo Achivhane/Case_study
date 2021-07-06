@@ -1,63 +1,140 @@
 var express = require('express');
 var router = express.Router();
 const Passenger = require('../model/passenger');
+const Ticket =require('../model/ticket');
 const expressAsyncHandler = require("express-async-handler");
 const generateToken = require("../createToken");
 
+
+// schema declaration/definition
+/**
+ * @swagger
+ * definitions:
+ *  passengers:
+ *   type: object
+ *   properties:
+ *    name:
+ *     type: string
+ *     description: name of passenger
+ *     example: 
+ *    email:
+ *     type: string
+ *     description: email of passenger
+ *     example: 
+ *    password:
+ *     type: string
+ *     description: password of passenger
+ *     example: 
+ *    phone:
+ *     type: number
+ *     description: number of passenger
+ *     example: 
+ *    age:
+ *     type: number
+ *     description: age of passenger
+ *     example: 
+ */
+
+// get request 
+/**
+ * @swagger
+ *  /api/passengers:
+ *   get:
+ *    summary: fetch passenger,
+ *    description: new passenger will register,
+ *    responses:
+ *     200:
+ *      description: successfull
+ *     404:
+ *      description: error
+ */
+
 //get request
+
  
 router.get('/passengers',function(req, res) {
     Passenger.find(function(err, passenger) {
         if (err)
+        {
+            console.log("error while getting passengers "+ err);
             res.send(err);
+        }
+        else
+        {
+            console.log("successfully getting passengers "+ passenger);
+            res.json(passenger);
+        }
+        });
+      
 
-        res.json(passenger);
-    });
+        
 });
 
-//post request for register data
-router.post('/register',(req, res)=>{
-    var reg=new Passenger();
-    reg.name=req.body.name,
-    reg.email=req.body.email,
-    reg.password=req.body.password,
-    reg.mobile_number=req.body.mobile_number,
+// schema declaration/definition
+/**
+ * @swagger
+ * definitions:
+ *  passengers:
+ *   type: object
+ *   properties:
+ *    name:
+ *     type: string
+ *     description: name of passenger
+ *     example: 
+ *    email:
+ *     type: string
+ *     description: email of passenger
+ *     example: 
+ *    password:
+ *     type: string
+ *     description: password of passenger
+ *     example: 
+ *    phone:
+ *     type: number
+ *     description: number of passenger
+ *     example: 
+ *    age:
+ *     type: number
+ *     description: age of passenger
+ *     example: 
+ */
 
-    
-    console.log("inside reg post");
-   
-    console.log(reg);
-  
-   reg.save(function(err) {
-    if (err)
-    {
-        console.log("testing rest1"+err);
-        res.send(err);
-    }
-    else
-    {
-        console.log("no issue");
-        res.json('new passenger is added to the database');
-    }
-});
-});
 
+//read the data from client application and match with Modal
 router.post("/users/registration", expressAsyncHandler(async (req,res)=>{
-    //read the data from client application and match with Modal
+   console.log("registration "+req.body.email);
     const user = new Passenger({
         name : req.body.name,
         email : req.body.email,
         password : req.body.password
     });
     const createdUser = await user.save();
-    res. send({
+    res.status(200).json({
         _id :  createdUser._id,
         name : createdUser.name,
         email : createdUser.email,
+        msg :"success",
         token : generateToken(createdUser)
     })
 }));
 
+ //post request for login
+
+/**
+ * @swagger
+ *  /api/login:
+ *   post:
+ *    summary: passenger login,
+ *    description: new passenger will register,
+ *    requestBody:
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#definitions/passengers'
+ *    responses:
+ *     200:
+ *      description: successfull
+ */
 
 router.post("/users/signin",expressAsyncHandler(async (req,res)=>{
     const user = await Passenger.findOne({"email":req.body.email});
@@ -74,33 +151,16 @@ router.post("/users/signin",expressAsyncHandler(async (req,res)=>{
                 email:user.email,
                 route:routes,
                 token : generateToken(user)
-            })
+            });
+           // res.status(200).json(1);
         }else{
-            res.status(401).send({"message":"invalid password"});
+            res.status(401).json({"message":"invalid password"});
         }
     }else{
-        res.status(401).send({"message":"invalid email or password"})
+        res.status(401).json({"message":"invalid email or password"})
     }
 }));
 
-//post request for login data
-router.post("/login",(req, res)=>{
-    var login = Passenger();
-    const body=req.body
-    const email=body.email
-    const password = body.password
- Passenger.findOne({email:email,password:password},(err,found)=>{
-      if(found){
-          console.log(found);
-          routes = "/search";
-         res.json(1);
-     }
-     else{
-        res.json("localhost:4200/admin");
-
-     }
- });    
-});
 //put request
 
 router.put('/passengers/:_id', function(req, res) {
@@ -118,14 +178,15 @@ router.put('/passengers/:_id', function(req, res) {
 	
     Passenger.findOneAndUpdate(id, data, function(err, found) {        
 	if (err){
-        res.send(err);
-        console.log("error inside put");
+        res.status(400).send(err);
+        console.log("error inside");
     } else{
-	res.send('Successfully! Employee updated - '+found.name);
+	res.status(200).send('Successfully! Employee updated - '+found.name);
     console.log("successful put");
     }
 	});
 });
+
 //delete request
 
 router.delete('/passengers/:_id', function(req, res) {
@@ -154,6 +215,31 @@ router.delete('/passengers/:_id', function(req, res) {
                 }
     });
 
+});
+
+router.post("/ticketSaved", expressAsyncHandler(async (req,res)=>{
+    console.log("registration "+req.body.email);
+    var ticket=new Ticket();
+    ticket.train_name=req.body.train_name;
+    ticket.from=req.body.from;
+    ticket.to=req.body.to;
+    ticket.fare=req.body.fare;
+    ticket.date=req.body.date;
+    ticket.time=req.body.arrival_time;
+    ticket.pname=req.body.name;
+     const storedTicket = await ticket.save();
+ }));
+
+ router.get('/getticket',  function(req, res) {
+    Ticket.find(function(err, ticket) {
+        if (err){
+console.log("error"+err)
+            res.send(err);
+        }else{
+console.log("ticket"+ticket)
+        res.json(ticket);
+        }
+    });
 });
 router.use('/api', router);
 module.exports = router;

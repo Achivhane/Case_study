@@ -11,10 +11,13 @@ export class PayemntServiceService {
   private bookURL="http://localhost:8086/reservation"; 
 
   constructor(private http:HttpClient) { }
+  
 
 
   getPaymentPending(id: any): Observable<any> {
+    console.log("getpaymentpending "+id)
     return this.http.get(`${this.bookingURL}/${id}`);
+    // return this.http.post('',reqbody)
   }
   postPaymentDetails(id:any):Observable<any>
   {

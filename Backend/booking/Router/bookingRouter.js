@@ -1,5 +1,7 @@
 var express = require('express');
 const Booking = require('../model/booking');
+const BookTrainDetails=require('../model/bookTraindetails')
+
 var router = express.Router();
 const axios = require("axios");
 
@@ -21,17 +23,36 @@ router.post('/books',(req,res)=>
   var books=new Booking(newBooks);
   console.log(books);
   books.save().then(()=>{
-    res.send(books.id); 
+    res.status(200).send(books.id); 
+    console.log("ticket booked");
+  });
+   
+}); 
+
+router.post('/savedBookTicket',(req,res)=>
+{
+
+  var newBooks={
+  train_name=req.body.train_name,
+  to:req.body.to,
+  from:req.body.from,
+  fare:req.body.fare
+  }
+ 
+  var books=new BookTrainDetails(newBooks);
+  console.log(books);
+  books.save().then(()=>{
+    res.status(200).send(books.id); 
     console.log("ticket booked");
   });
    
 }); 
 
  router.get('/booking/:id',  function(req, res) {
-	
+	console.log("in the booking"+req.body);
     Booking.findById(req.params.id).then((booking) =>
     {
-        console.log(booking)
+        console.log("in the booking"+booking)
        
        if(booking)
        {
@@ -45,12 +66,12 @@ axios.all([
   console.log('Date created: ', response[1].data.trainName);
 
   var passengerObject ={name : response[0].data.name , email : response[0].data.email , trainName : response[1].data.train_name,from : response[1].data.from, to : response[1].data.to,fare : response[1].data.fare,booking_id:booking.id}
-  res.send(passengerObject);
+  res.status(200).send(passengerObject);
 });
        
        }
        else{
-           res.send("invalid Booking")
+           res.status(404).send("invalid Booking")
        }
     })
 });
@@ -77,22 +98,16 @@ axios.all([
 
   var passengerObject ={name : response[0].data.name , email : response[0].data.email , trainName : response[1].data.train_name,from : response[1].data.from, to : response[1].data.to,fare : response[1].data.fare,booking_id:booking.id}
   
-  res.send(passengerObject);
+  res.status(200).send(passengerObject);
 });
 
        
        }
        else{
-           res.send("invalid Booking")
+           res.status(200).send("invalid Booking")
        }
     })
 });
-
-
-
-
-
-
 
 router.get('/books',(req,res)=>
 {

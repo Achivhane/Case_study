@@ -1,18 +1,29 @@
+/*!
+ * Bootstrap v3.3.1 (http://getbootstrap.com)
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)*/
+ .container{
+     width: auto;
+     height: 6vh;
+ }
 footer {
-    height: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background-color: rgb(159, 216, 238);
+	text-align: center;
+	background-color: #1f3646;
+	padding: 0px 0px;
 }
 
-.copyright {
-    color: #971c1c;
-    font-size: 12px;
-    position: absolute;
-    left: 50%;
-    bottom: 10px;
-    transform: translateX(-50%);
-  }
+footer .primary-button {
+	margin-bottom: 20px;
+}
+
+footer p {
+	color: #fff;
+	font-size: 12px;
+	margin-top: 20px; 	
+}
+
+footer p em {
+	font-style: normal;
+	font-weight: 700;
+	color: #ffe165;
+}

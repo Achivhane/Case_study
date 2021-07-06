@@ -1,60 +1,71 @@
 <!-- Resevation Details -->
-<div style="width: 400px;" class="container-fluid">
-  <h2>Reserved Ticket</h2><br><br>
-      <form>
-        <div class="form-group" >
-          <label for="name">Train Name</label>
-          <input type="text" class="form-control" id="id" required [(ngModel)]="train._id" name="_id" readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label for="name">Train Name</label>
-          <input type="text" class="form-control" id="train_name" required [(ngModel)]="train.train_name" name="train_name" readonly="readonly">
-        </div>
-    
-        <div class="form-group">
-          <label for="name">Souce</label>
-          <input type="text" class="form-control" id="from" required [(ngModel)]="train.from" name="from" readonly="readonly">
-        </div>
-    
-        <div class="form-group">
-          <label for="name">Destination</label>
-          <input type="text" class="form-control" id="to" required [(ngModel)]="train.to" name="to" readonly="readonly">
-        </div>
+<body>
+  <div style="width: 400px;" class="container-fluid">
+    <h2>RESERVE A TICKET</h2><br>
+    <form [formGroup]="TPData">
+      <div class="form-group">
+        <label for="name">Train Id</label>
+        <input type="text" class="form-control" id="id" formControlName="_id"required [(ngModel)]="train._id" name="_id" readonly="readonly">
+      </div>
+      <div class="form-group">
+        <label for="name">Train Name</label>
+        <input type="text" class="form-control" id="train_name"formControlName="train_name" required [(ngModel)]="train.train_name"
+          name="train_name" readonly="readonly">
+      </div>
 
-        <div class="form-group">
-            <label for="name">fare</label>
-            <input type="text" class="form-control" id="fare" required [(ngModel)]="train.fare" name="fare" readonly="readonly">
-          </div>
+      <div class="form-group">
+        <label for="name">Source</label>
+        <input type="text" class="form-control" id="from"formControlName="from" required [(ngModel)]="train.from" name="from"
+          readonly="readonly">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Destination</label>
+        <input type="text" class="form-control" id="to" formControlName="to" required [(ngModel)]="train.to" name="to" readonly="readonly">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Fare</label>
+        <input type="number" class="form-control" id="fare" formControlName="fare" required [(ngModel)]="train.fare" name="fare"
+          readonly="readonly">
+      </div>
+
       
-          <div class="form-group">
-            <label for="name">arrival_time</label>
-            <input type="text" class="form-control" id="arrival_time" required [(ngModel)]="train.arrival_time" name="arrival_time" readonly="readonly">
-          </div>
-      
-          <div class="form-group">
-            <label for="name">departure_time</label>
-            <input type="text" class="form-control" id="departure_time" required [(ngModel)]="train.departure_time" name="departure_time" readonly="readonly">
-          </div>
+      <div class="form-group">
+        <label for="name">Arrival Time</label>
+        <input type="time" class="form-control" id="arrival_time" formControlName="arrival_time" required [(ngModel)]="train.arrival_time"
+          name="arrival_time" readonly="readonly">
+      </div>
 
-          <div class="form-group">
-        
-           </div> 
-           <div ng-hide="id" class="ng-hide">
-            <label for="name">Destination</label>
-            <input type="text" class="form-control" id="to" required [(ngModel)]="train.to" name="to" readonly="readonly">
-          </div>
-           <div class="form-group">
-<!-- to get passenger id -->
-            <label for="passenger">Passenger:</label>
+      <div class="form-group">
+        <label for="name">Departure Time</label>
+        <input type="time" class="form-control" id="departure_time" formControlName="departure_time" required [(ngModel)]="train.departure_time"
+          name="departure_time" readonly="readonly">
+      </div>
+      <div class="form-group">
 
-            <select name="my-select" ng-model="_user" id ="_user._id" [(ngModel)]="_user._id" class="form-control">
-              <option disabled>Select Passenger</option>
-              <option>Choose Passenger</option>
-              <option  *ngFor="let i of _user"  value="{{i._id}}">{{i.name}}</option>
-              </select>
-  </div>
- 
+      </div>
+      <div>
+        <label for="name">Passenger Name</label>
+        <input type="text" class="form-control" formControlName="name" required name="name">
+      </div><br>
+      <!-- <div class="form-group">
+        // to get passenger id
+        <label for="passenger">Passenger</label>
 
-        <div>
-<button type="submit" class="btn btn-success" (click)="Booking(train._id,_user._id)">Submit</button> 
-    </div> </form>
+        <select name="my-select" ng-model="_user" id="_user._id" [(ngModel)]="_user._id" class="form-control">
+          <option disabled>Select Passenger</option>
+          <option>Choose Passenger</option>
+          <option *ngFor="let i of _user" value="{{i._id}}">{{i.name}}</option>
+        </select>
+      </div> -->
+
+
+      <div>
+        <button type="submit" class="btn btn-success" (click)="Booking(train._id,_user._id)">Submit</button>
+      </div>
+    </form>
+    </div>
+    <button type="submit" class="btn btn-primary" routerLink="/search" routerLinkActive="active">Back</button>
+    </body>
+    

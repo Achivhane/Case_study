@@ -4,6 +4,7 @@ import {ViewService} from './view.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingServiceService } from '../booking/booking-service.service';
 
+
 @Component({
   selector: 'app-view-ticket',
   templateUrl: './view-ticket.component.html',
@@ -24,16 +25,19 @@ export class ViewTicketComponent implements OnInit {
     this.bookservice.getTrain(this.id).
     subscribe(data => {
       console.log(data)
-      this.ticket = data;
+      this.ticket = data,
+      this.ViewTicket(this.ticket);
     }, error => console.log(error));
-
+    
   }
-  public ViewTicket(){
-    console.log("inside of viewTicket method")
-    this.viewservice.viewticket().subscribe(data=>{
-      console.log(data)
-      
-  })
+  public ViewTicket(data:any){
+    // this.viewservice.viewticket().subscribe(data=>{
+    //   console.log(data)
+      this.viewservice.viewtickethome(data).subscribe(data=>{
+        console.log("view ticket data"+data);
+      })
+    
+ 
   }
 
   

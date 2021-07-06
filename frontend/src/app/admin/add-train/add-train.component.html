@@ -1,0 +1,79 @@
+<div class="container-fluid">
+
+    <body>
+
+        <div class="train">
+            <h1>Add Train here..</h1>
+            <div class="card-body">
+
+                <form #train='ngForm' (ngSubmit)='onSubmit(train)'>
+                    <div id="train" ngModelGroup #train='ngModelGroup'>
+                        <div class="form-group">
+                            <label for="train_name">Train Name</label>
+                            <input type="text" id="train_name" class="form-control" ngModel name="train_name" required
+                                #trainname='ngModel'>
+                            <span class="help-block" *ngIf='!trainname.valid && trainname.touched'></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="trainnumber">From</label>
+                            <input type="text" id="from" class="form-control" ngModel name="from" required
+                                #trainnumber='ngModel'>
+                            <span class="help-block" *ngIf='!trainnumber.valid && trainnumber.touched'></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="source">To</label>
+                            <input type="text" id="to" class="form-control" ngModel name="to" required
+                                #source='ngModel'>
+                            <span class="help-block" *ngIf='!source.valid && source.touched'></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fare">Fare</label>
+                            <input type="number" id="fare" class="form-control" ngModel name="fare" required
+                                #destination='ngModel'>
+                            <span class="help-block" *ngIf='!destination.valid && destination.touched'></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" class="form-control" min={{dat}} ngModel name="date" required
+                                #date='ngModel'>
+                            <span class="help-block" *ngIf='!date.valid && date.touched'></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Arrival Time</label>
+                            <input type="time" id="arrival_time" class="form-control" ngModel name="arrival_time"
+                                required #fare='ngModel'>
+                            <span class="help-block" *ngIf='!fare.valid && fare.touched'></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="class">Departure Time</label>
+                            <input type="time" id="departure_time" class="form-control" ngModel name="departure_time"
+                                required #class='ngModel'>
+                            <span class="help-block" *ngIf='!class.valid && class.touched'></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resdate">Available</label>
+                            <input type="text" id="available" class="form-control" ngModel name="available" required
+                                #resdate='ngModel'>
+                            <span class="help-block" *ngIf='!resdate.valid && resdate.touched'></span>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="submit">
+                        <button class="btn btn-outline-secondary btn-lg btn-block" type="submit"
+                            [disabled]='!train.valid'>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+    <button type="submit" class="btn btn-primary" routerLink="/adminhome" routerLinkActive="active">Back To
+        Home</button>
+</div>

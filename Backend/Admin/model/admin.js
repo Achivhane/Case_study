@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 //create schema
 var Schema = mongoose.Schema;
 var AdminSchema = new Schema({
-    // passenger:{type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Passenger"},
+
     passengerId:{type: mongoose.Schema.Types.ObjectId,
         ref: "Passenger"},
     train_name:{
@@ -27,7 +26,19 @@ var AdminSchema = new Schema({
         type:String
     },
     available:{
-        type:Boolean
+        type:String
+    },
+    name:{
+        type:String
+    },
+    password:{
+        type:String
+    },
+    email:{
+        type:String
+    },
+    date:{
+        type:Date
     }
 })
 

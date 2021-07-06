@@ -8,12 +8,10 @@ var PassengerSchema = new Schema({
         type: String
     },
     email:{
-        type: String, 
-        unique:[true, "Email is already Exit"]
+        type: String
     },
     password:{
-        type: String,
-        unique:true
+        type: String
     },
     mobile_number:{
         type:Number

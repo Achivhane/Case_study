@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { PassengerServiceService } from '../passenger-service.service';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
+import { AuthserviceService } from 'src/app/authservice.service';
 
-
+//regular expression
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 @Component({
@@ -18,114 +18,102 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
 
 
 export class LoginComponent implements OnInit {
-
+  // creating object
   username: any;
   password: any;
   errors: any;
   validateStatus: boolean;
   errorDetl: string;
-  token:any;
-  userData:[]=[];
-  
+  token: any;
+  userData: [] = [];
 
-
-
-  
-PData = new FormGroup({
-  email:new FormControl(''),
-  password:new FormControl('')
-})
- value : string ='';
-  constructor(private pass:PassengerServiceService,private router : Router,private http: HttpClient) {
+  PData = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  })
+  value: string = '';
+  //injecting services in the constructor
+  constructor(private pass: PassengerServiceService, private router: Router, private http: HttpClient, private auth: AuthserviceService) {
     this.validateStatus = false;
-      this.errorDetl = '';
+    this.errorDetl = '';
   }
-  message:any;
+  message: any;
   ngOnInit(): void {
     console.log("component loaded");
-    console.log("message "+this.message)
+    console.log("message " + this.message)
   }
 
- search(data:any){
-  console.log(data)
-  if(data ===JSON.stringify(data))
-  {
-    console.log("inside loop");
-    this.router.navigateByUrl('booking');
-    this.router.navigate(['updatetrain',10])
-  }else{
-    console.log("outside loop");
-    this.router.navigate(['/booking',]);
-    
+  search(data: any) {
+    console.log(data)
+    if (data === JSON.stringify(data)) {
+      console.log("inside loop");
+      this.router.navigateByUrl('booking');
+      this.router.navigate(['updatetrain', 10])
+    } else {
+      console.log("outside loop");
+      this.router.navigate(['/booking',]);
+
+    }
   }
-}
-
-loginUserTSE(data:any): Observable<any> {
-  console.log(data)
-  const url = 'http://localhost:5000/api/users/signin';
-  return this.http.post(url, data);
-}
-
-
-
-validateSignIn() {
-
-if (this.username != null) {
-  if (EMAIL_REGEX.test(this.username)) {
-      this.validateStatus = true;
-  } else {
-    document.getElementById('username')?.classList.add('invalid-input');
-    document.getElementById('password')?.classList.add('invalid-input');
-  
-    this.validateStatus = false;
-    this.errorDetl = 'Enter a valid email';
+  loginUserTSE(data: any): Observable<any> {
+    console.log(data)
+    const url = 'http://localhost:5000/api/users/signin';
+    return this.http.post(url, data);
   }
-}else {
+  //applying validation
+  validateSignIn() {
+    console.log("" + this.username)
+    if (this.username != null) {
+      if (EMAIL_REGEX.test(this.username)) {
+        this.validateStatus = true;
+      } else {
+        document.getElementById('username')?.classList.add('invalid-input');
+        document.getElementById('password')?.classList.add('invalid-input');
 
- document.getElementById('username')?.classList.add('invalid-input');
- document.getElementById('password')?.classList.add('invalid-input');
-  this.validateStatus = false;
-  this.errorDetl = 'Email is required';
-}
+        this.validateStatus = false;
+        this.errorDetl = 'Enter a valid email';
+      }
+    } else {
 
-if (this.validateStatus) {
-  if (this.password == null) {
-    //document.getElementById('username').classList.add('invalid-input');
-    this.errorDetl = 'Password is required';
-    this.validateStatus = false;
-  }else {
-    this.validateStatus = true;
-  }
-}
+      document.getElementById('username')?.classList.add('invalid-input');
+      document.getElementById('password')?.classList.add('invalid-input');
+      this.validateStatus = false;
+      this.errorDetl = 'Email is required';
+    }
 
-if (this.validateStatus) {
+    if (this.validateStatus) {
+      if (this.password == null) {
+        //document.getElementById('username').classList.add('invalid-input');
+        this.errorDetl = 'Password is required';
+        this.validateStatus = false;
+      } else {
+        this.validateStatus = true;
+      }
+    }
 
-   var reqBody={
-    email:this.username,
-    password:this.password
- }
-   this.loginUserTSE(reqBody).subscribe(res => {
-        if(res.route ==='/user')
-        {
-          console.log("hehehehehhe");
-         
-          this.router.navigate(['search']);
-          
+    if (this.validateStatus) {
+
+      var reqBody = {
+        email: this.username,
+        password: this.password
+      }
+      this.loginUserTSE(reqBody).subscribe(res => {
+
+        if (res.name != '') {
+          alert("Login Successfull");
+          this.auth.setUser(res.name);
+          this.router.navigate(['search'])
+          console.log("get user " + this.auth.getUser());
         }
-        else
-        {
-          console.log("testing data"+res.message);
-          
-          this.message="Invalid Username and Password";
-        }
-   });
+        else {
 
-
+          alert("Please check username and password")
         }
 
-}
-
-
- 
-
+      }, error => {
+        this.errors = error;
+        alert("Please check username and password")
+      });
+    }
+  }
 }

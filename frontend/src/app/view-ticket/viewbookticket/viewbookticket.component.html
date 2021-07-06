@@ -1,0 +1,37 @@
+<body>
+    <div class="container-fluid">
+      <h2><b>VIEW TICKET</b></h2>
+     
+      <div class="container">
+      <form>
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status" >
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+               
+                  <th>TRAIN NAME</th>
+                  <th>FROM</th>
+                  <th>TO</th>
+                  <th>FARE</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let ticket of ticket'>
+                  <td>{{ticket.train_name}}</td>
+                  <td>{{ticket.from}}</td>
+                  <td>{{ticket.to}}</td>
+                  <td>{{ticket.fare}}</td> 
+                
+                </tr>
+            </tbody>
+            </table>
+          </div>
+          </div>
+      </form>
+      </div>
+      <div>
+        <button type="submit" class="btn"routerLink="/search" routerLinkActive="active">Back To Home</button>
+      </div>
+      </div>
+      </body>

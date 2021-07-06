@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 //create schema
+var Schema = mongoose.Schema;
+var BookingSchema = new Schema({
 
-mongoose.model('Booking', {
   
     passengerID:{
         type:mongoose.SchemaTypes.ObjectId,
@@ -25,3 +26,4 @@ mongoose.model('Booking', {
         required :true
     }
 })
+module.exports = mongoose.model('Booking', BookingSchema);

@@ -1,4 +1,14 @@
 
 .navbar_navbar-default{
-background-color: rgb(159, 216, 238);
+    background-color: #1f3646;
+	padding: 0px 0px;
+    font-style: normal;
+	font-weight: 700;
+	color: #ffe165;
+    color: #fff;
+	font-size: 12px;
+	margin-top: 40px;
+}
+nav{
+    height:60px;
 }

@@ -7,6 +7,5 @@ export class Passenger {
     password:string,
     mobile_number:number
     ){}
-    
     }
     

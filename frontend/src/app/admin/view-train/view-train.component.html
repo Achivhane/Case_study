@@ -1,0 +1,46 @@
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header bg-primary text-white text-center">
+        <h3>TRAIN DETAILS</h3>
+      </div>
+
+      <div class="card-body">
+        <table class="table">
+          <tr>
+
+            <th>Train Name</th>
+            <th>From</th>
+            <th>TO</th>
+            <th>Date</th>
+            <th>Arrival Time</th>
+            <th>Departure Time</th>
+            <th>Fare</th>
+            <th>available</th>
+            <th>Delete</th>
+          </tr>
+          <tbody>
+            <tr *ngFor='let t of trains'>
+
+              <td>{{t.train_name}}</td>
+              <td>{{t.from}}</td>
+              <td>{{t.to}}</td>
+              <td>{{t.date|date}}</td>
+              <td>{{t.arrival_time}}</td>
+              <td>{{t.departure_time}}</td>
+              <td>{{t.fare}}</td>
+              <td>{{t.available}}</td>
+              <td><button type="button" class="btn btn-danger" (click)="deleteTrain(t._id)">Delete</button></td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <div class="card-footer"></div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" routerLink="/addtrain" routerLinkActive="active">Back</button>
+  &nbsp;
+  <button type="submit" class="btn btn-primary" routerLink="/adminhome" routerLinkActive="active">Back To Home</button>
+</body>

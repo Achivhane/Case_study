@@ -1,6 +1,8 @@
+<body>
 <div class="container-fluid">
-  <h1>Your ticket has been booked ,Please find below details </h1>
-  
+  <h2><b>VIEW TICKET</b></h2>
+  <h3>Your ticket has been booked ,Please find below details </h3>
+  <div class="container">
   <form>
     <div class="d-flex justify-content-center">
       <div class="spinner-border" role="status" >
@@ -23,12 +25,17 @@
               <td>{{ticket.departure_time}}</td>
               <td>{{ticket.arrival_time}}</td>
               <td>{{ticket.fare}}</td>
-            
             </tr>
         </tbody>
-        
         </table>
       </div>
       </div>
   </form>
+  <div>
+    <button type="submit" class="btn"routerLink="/search" routerLinkActive="active">Back To Home</button>
+  &nbsp;
+    <button type="submit" class="btn"routerLink="/home" routerLinkActive="active">Logout</button>
   </div>
+  </div>
+  </div>
+  </body>

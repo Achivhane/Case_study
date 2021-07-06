@@ -1,21 +1,169 @@
 const express= require('express');
-const app=express();
+//const app=express();
 const mongoose = require('mongoose');
 const bodyParser= require('body-parser');
 const axios = require("axios")
 const cors =require('cors');
-app.use(cors());
-
-mongoose.connect('mongodb+srv://admin:admin@cluster0.d36b8.mongodb.net/booking2?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true }); 
+//importing db connection
+const connection = require('./database/DBconnection')
+//importing swagger
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+var app = express();
+//enable the cors
+app.use(cors()); 
 
 mongoose.set('useFindAndModify',false);
 require('./model/booking');
 const Booking=mongoose.model('Booking');
+//MIME type---->it is used to communicate with the client
+app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
-//const booking=require('./Router/bookingRouter')
-//app.use(booking);
+//defining the options of swaggwer
+const swaggerOption={
+  swaggerDefinition:{
+      openapi:'3.0.0',
+      info:{
+          title:'express API for booking',
+          version:'1.0.0',
+          contact:{
+              author:"asmita",
+          },
+          server:["http://localhost:8086"]
+      },
+     
+  },
+  apis:["bookingServer.js"]
+  }
+  const swaggerDocs =swaggerJsDoc(swaggerOption);
 
+app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs));
+
+app.use(express.json());
+// schema declaration/definition
+/**
+* @swagger
+* definitions:
+*  booking:
+*   type: object
+*   properties:
+*    passengerID:
+*     type: object
+*     description: passenger id
+*     example: 
+*    trainID:
+*     type: object
+*     description: train id
+*     example: 
+*    bookedDate:
+*     type: date
+*     description: booking date
+*     example: 
+*    paymentDone:
+*     type: boolean
+*     description: payment is done or not
+*     example: 
+*/
+
+// swagger get request 
+/**
+* @swagger
+*  /:
+*   get:
+*    summary: fetch booking
+*    description: fetching all booking
+*    responses:
+*     200:
+*      description: successfull
+*     404:
+*      description: error
+*/
+
+/**
+ * @swagger
+ *  /books:
+ *   post:
+ *    summary: post booking
+ *    description: post booking
+ *    requestBody:
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#definitions/booking'
+ *    responses:
+ *     200:
+ *      description: successfull
+ */
+// swagger get request by id
+/**
+* @swagger
+*  /booking/{_id}:
+*   get:
+*    summary: fetch particular booking by id
+*    description: fetch particular booking by id
+*    parameters:
+*       - in : Path
+*         name: _id
+*         required: true
+*         description: ID of the booking
+*    responses:
+*     200:
+*      description: successfull
+*     404:
+*      description: error
+*/
+// swagger get request by paymentDone
+/**
+* @swagger
+*  /bookpayment/{paymentDone}:
+*   get:
+*    summary: fetch booking by payment,
+*    description: fetch booking by payment
+*    parameters:
+*       - in : Path
+*         name: _id
+*         required: true
+*         description: paymentDone
+*    responses:
+*     200:
+*      description: successfull
+*     404:
+*      description: error
+*/
+
+// swagger get request 
+/**
+* @swagger
+*  /books:
+*   get:
+*    summary: fetch booking,
+*    description: fetching all booking
+*    responses:
+*     200:
+*      description: successfull
+*     404:
+*      description: error
+*/
+//swagger put request 
+
+/**
+ * @swagger
+ *  /booking/{_id}:
+ *   put:
+ *    summary: update booking
+ *    description: fetch particular booking and update
+ *    parameters:
+ *       - in : Path
+ *         name: _id
+ *         required: true
+ *         description: ID of the booking
+ *    responses:
+ *     200:
+ *      description: successfull
+ *     404:
+ *      description: error
+ */
 app.get('/',(req,res)=>
 {
   console.log(req);
@@ -101,12 +249,6 @@ axios.all([
     })
 });
 
-
-
-
-
-
-
 app.get('/books',(req,res)=>
 {
     Booking.find().then((books)=>{
@@ -128,8 +270,15 @@ app.put('/reservation/:id',function(req,res,next){
         });
     });
 });
-
-
-app.listen(8086,()=>{
-    console.log("passenger service up and working");
-  });
+var port = process.env.PORT || 8086;
+//for testing 
+console.log("booking server is listening on port "+port);
+var server =app.listen(port,function(){
+  var host = server.address().address;
+  var port = server.address().port;
+})
+module.exports = server;
+//port=8086
+// app.listen(port,()=>{
+//     console.log("booking server is listening on port"+port);
+//   });

@@ -1,7 +1,8 @@
+<body>
 <div class="container-fluid">
-<h1>Payment Screen</h1>
-
-<form>
+<h3>PAYMENT SCREEN</h3>
+<div class="container">
+  
 <table class="table">
   <thead>
     <tr>
@@ -10,7 +11,7 @@
       <th scope="col">From</th>
       <th scope="col">To</th>
       <th scope="col">Fare</th>
-      <th scope="col">Payment</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -20,11 +21,21 @@
       <td>{{paymentMessage.from}}</td>
       <td>{{paymentMessage.to}}</td>
       <td>{{paymentMessage.fare}}</td>
-      <td><button class="btn btn-danger" (click)="paymentId(id)">Pay</button></td>
+      
     </tr>
   </tbody>
 </table>
+<form [formGroup]="PData">
+<div>
+Back Name:<input type="text" placeholder="Enter your bank name"formControlName="bank_name">&nbsp;
+Account Number:<input type="password" placeholder="Enter your account number"formControlName="account_number"required>&nbsp;
+IFCS code:<input type="text" placeholder="Enter your IFCS code"formControlName="ifcs_code" required><br><br><br></div>
+<div class="one">
+<button type="submit" class="btn btn-danger"[disabled]="!PData.valid" (click)="paymentId(id)">Pay</button></div>
 </form>
+<div>
+  <button type="submit" class="btn"routerLink="/booking/:id'" routerLinkActive="active">Back</button>
+  </div>
+  
 </div>
-
 
