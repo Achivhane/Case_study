@@ -108,14 +108,25 @@ router.post("/users/registration", expressAsyncHandler(async (req,res)=>{
         email : req.body.email,
         password : req.body.password
     });
-    const createdUser = await user.save();
-    res.status(200).json({
-        _id :  createdUser._id,
-        name : createdUser.name,
-        email : createdUser.email,
-        msg :"success",
-        token : generateToken(createdUser)
-    })
+    try{
+        const createdUser = await user.save();
+        res.status(200).json({
+            _id :  createdUser._id,
+            name : createdUser.name,
+            email : createdUser.email,
+            msg :"success",
+            token : generateToken(createdUser)
+        })
+    }catch(error){
+        res.status(200).json({
+            msg :"Error",
+            token : generateToken(createdUser)
+        })
+        console.log("exception occured in registration ",error)
+    }
+   
+
+    
 }));
 
  //post request for login

@@ -155,7 +155,7 @@ background-color: rgba(255, 225, 101, 0.3);
 
 
 .banner {
-  background-image: url(C:\Users\divya\Downloads\Train3.jpeg);
+  background-image: url(../../assets/train.webp);
 background-repeat: no-repeat;
 background-size: cover;
 background-position: center center;
