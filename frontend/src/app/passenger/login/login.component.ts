@@ -22,11 +22,11 @@ export class LoginComponent implements OnInit {
   username: any;
   password: any;
   errors: any;
-  validateStatus: boolean;
+  validateStatus: boolean = true;
   errorDetl: string;
   token: any;
   userData: [] = [];
-
+  valid: boolean = true;
   PData = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   value: string = '';
   //injecting services in the constructor
   constructor(private pass: PassengerServiceService, private router: Router, private http: HttpClient, private auth: AuthserviceService) {
-    this.validateStatus = false;
+    this.validateStatus = true;
     this.errorDetl = '';
   }
   message: any;
@@ -100,19 +100,21 @@ export class LoginComponent implements OnInit {
       this.loginUserTSE(reqBody).subscribe(res => {
 
         if (res.name != '') {
-          alert("Login Successfull");
+          // alert("Login Successfull");
           this.auth.setUser(res.name);
           this.router.navigate(['search'])
           console.log("get user " + this.auth.getUser());
+          this.valid = true;
         }
         else {
-
-          alert("Please check username and password")
+          this.valid = false;
+          // alert("Please check username and password")
         }
 
       }, error => {
         this.errors = error;
-        alert("Please check username and password")
+        this.valid = false;
+        // alert("Please check username and password")
       });
     }
   }

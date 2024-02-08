@@ -116,3 +116,11 @@ label {
 input {
   margin-top: -30px;
 }
+.invalid{
+	margin-left: 320px;
+    color: red;
+}
+.feedback{
+	width: 40vw;
+  	height: 2vw;
+}

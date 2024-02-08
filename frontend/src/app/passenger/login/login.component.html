@@ -37,9 +37,14 @@
             />
             <div class="invalid-feedback"></div>
           </div>
-          <p class="errorDetect">{{ errorDetl }}</p>
         </div>
       </div>
+	  <div class="feedback invalid" *ngIf="!validateStatus">
+		<p class="errorDetect">{{ errorDetl }}</p>
+	  </div>
+	  <div class="feedback invalid" *ngIf="!valid">
+		<p class="errorDetect">Incorrect e-mail or password.</p>
+	  </div>
       <div class="signIn">
         <button
           type="button"
