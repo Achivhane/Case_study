@@ -1,28 +1,65 @@
-<body>
-	<div class="login">
-		<div class="tab">
-			<h1 class="hd1"><b>Login</b></h1>
-		</div>
-		<div class="tab red">
-			<form id="needs-validation"class="one">
-				<div class="form-group">
-					<label for="InputEmail">Email address</label>
-					<input type="email" id="username" name="username" [(ngModel)]="username" class="form-control" aria-describedby="emailHelp" placeholder="someone@something.com" required="required"/>
-					
-					  <small id="emailHelp" class="form-text text-muted"></small>
-					<div class="invalid-feedback"></div>
-				  </div>
-				  <div class="form-group">
-					<label for="InputPassword">Password</label>
-					<input type="password" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" required="required"/>
-					<div class="invalid-feedback"></div>
-				  </div>
-				  <p class="errorDetect">{{errorDetl}}</p>
-				  <br>
-				  <button type="button" id="signin" class="btn btn-primary" (click)='validateSignIn()' >Sign In</button>
-				&nbsp;
-					<button type="button" class="btn btn-primary" routerLink="/register" routerLinkActive="active">Register</button>
-				
-			</form>
-		</div>
-	</div>
+<div class="search1">Login</div>
+<div class="search">
+  <form id="needs-validation">
+    <div class="from">
+      <div class="serchItemBox">
+        <div class="searchItem">
+          <div class="form-group">
+            <label for="InputEmail">Email address</label>
+            <input
+              type="email"
+              id="username"
+              name="username"
+              [(ngModel)]="username"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="someone@something.com"
+              required="required"
+            />
+
+            <small id="emailHelp" class="form-text text-muted"></small>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+      </div>
+      <div class="serchItemBox">
+        <div class="searchItem">
+          <div class="form-group">
+            <label for="InputPassword">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              class="form-control"
+              placeholder="Password"
+              required="required"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+          <p class="errorDetect">{{ errorDetl }}</p>
+        </div>
+      </div>
+      <div class="signIn">
+        <button
+          type="button"
+          id="signin"
+          class="btn btn-primary"
+          (click)="validateSignIn()"
+        >
+          Sign In
+        </button>
+      </div>
+      <div class="register">
+        <button
+          type="button"
+          class="btn btn-primary"
+          routerLink="/register"
+          routerLinkActive="active"
+        >
+          Register
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
