@@ -1,41 +1,80 @@
-<body>
-<div class="container-fluid">
-<h3>PAYMENT SCREEN</h3>
-<div class="container">
-  
-<table class="table">
-  <thead>
-    <tr>
-      <!-- <th scope="col">ID</th> -->
-      <th scope="col">Train Name</th>
-      <th scope="col">From</th>
-      <th scope="col">To</th>
-      <th scope="col">Fare</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <!-- <td>{{paymentMessage.id}}</td> -->
-      <td>{{paymentMessage.trainName}}</td>
-      <td>{{paymentMessage.from}}</td>
-      <td>{{paymentMessage.to}}</td>
-      <td>{{paymentMessage.fare}}</td>
-      
-    </tr>
-  </tbody>
-</table>
-<form [formGroup]="PData">
-<div>
-Back Name:<input type="text" placeholder="Enter your bank name"formControlName="bank_name">&nbsp;
-Account Number:<input type="password" placeholder="Enter your account number"formControlName="account_number"required>&nbsp;
-IFCS code:<input type="text" placeholder="Enter your IFCS code"formControlName="ifcs_code" required><br><br><br></div>
-<div class="one">
-<button type="submit" class="btn btn-danger"[disabled]="!PData.valid" (click)="paymentId(id)">Pay</button></div>
-</form>
-<div>
-  <button type="submit" class="btn"routerLink="/booking/:id'" routerLinkActive="active">Back</button>
+<div class="main">
+  <div class="search1">PAYMENT SCREEN</div>
+  <div class="searchTable">
+    <div class="search2">Train Details....</div>
+    <table>
+      <tr>
+        <th>Train ID</th>
+        <th>Train Name</th>
+        <th>From</th>
+        <th>TO</th>
+        <th>Fare</th>
+      </tr>
+      <tbody>
+        <tr>
+          <td>{{ paymentMessage._id }}</td>
+          <td>{{ paymentMessage.trainName }}</td>
+          <td>{{ paymentMessage.from }}</td>
+          <td>{{ paymentMessage.to }}</td>
+          <td>{{ paymentMessage.fare }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+  <div class="search">
+    <form [formGroup]="PData">
+      <div class="from">
+        <div class="serchItemBox">
+          <div class="searchItem">
+            Bank Name:<input
+              type="text"
+              class="inputFrom"
+              placeholder="Enter your bank name"
+              formControlName="bank_name"
+            />
+          </div>
+        </div>
+        <div class="serchItemBox">
+          <div class="searchItem">
+            Account Number:<input
+              type="number"
+              class="inputFrom"
+              placeholder="Enter your account number"
+              formControlName="account_number"
+              required
+            />
+          </div>
+        </div>
+        <div class="serchItemBox">
+          <div class="searchItem">
+            IFCS code:<input
+              type="text"
+              class="inputFrom"
+              placeholder="Enter your IFCS code"
+              formControlName="ifcs_code"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="payButton">
+        <button
+          type="submit"
+          style="background-color: blue; color: white"
+          class="btn btn-default"
+          [disabled]="!PData.valid"
+          (click)="paymentId(id)"
+        >
+          Pay
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="from2">
+    <div style="width: 18vw; height: 4vw">
+      <button type="submit" class="btn btn-primary home" (click)="backtoHome()">
+        Back To Home
+      </button>
+    </div>
+  </div>
 </div>
-
