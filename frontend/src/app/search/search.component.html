@@ -1,63 +1,105 @@
 <div class="container-fluid">
-    <body>
-        <header>
-            <h1 class="hd">Railway Reservation System</h1>
-            <div class="home">
-                <p class="menu"><a href="userhome" routerLink="/search" routerLinkActive="active">Home</a></p>
+  <header>
+    <h1 class="hd">Railway Reservation System</h1>
+  </header>
+  <div class="sidenav">
+    <a href="userhome" routerLink="/search" routerLinkActive="active">Home</a>
+    <a
+      href="userviewtrainfwd"
+      routerLink="/viewbookticket"
+      routerLinkActive="active"
+      >View Ticket</a
+    >
+    <a href="userlogout" routerLink="/login" routerLinkActive="active"
+      >Logout</a
+    >
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="main">
+    <div class="search1">Search Train Here</div>
+    <div class="search">
+      <form [formGroup]="SearchData">
+        <div class="from">
+          <div class="serchItemBox">
+            <div class="searchItem">
+              <img
+                src="https://www.railofy.com/images/desktop_icons/From_train.svg"
+              />
+              <input
+                type="text"
+                placeholder="Enter From Station"
+                formControlName="from"
+                class="inputFrom"
+              />
             </div>
-            <div class="home">
-                <p class="menu"><a href="userviewtrainfwd" routerLink="/viewbookticket" routerLinkActive="active">View
-                        Ticket</a></p>
+          </div>
+          <div class="serchItemBox">
+            <div class="searchItem">
+              <img
+                src="https://www.railofy.com/images/desktop_icons/To_train.svg"
+              />
+              <input
+                type="text"
+                placeholder="Enter To Station"
+                formControlName="to"
+                class="inputFrom"
+              />
             </div>
-            <!-- <div class="home">
-                <p class="menu"><a href="userprofile"routerLink="/profile" routerLinkActive="active">Profile</a></p>
-            </div> -->
-            <div class="home">
-                <p class="menu"><a href="userlogout" routerLink="/login" routerLinkActive="active">Logout</a></p>
+          </div>
+          <div class="serchItemBox">
+            <div class="searchItem">
+              <input
+                type="date"
+                placeholder="Enter From Station"
+                formControlName="date"
+                class="inputFrom"
+              />
             </div>
-        </header>
-        <div class="tab">
-            <h1 class="menu1">Search Trains</h1>
+          </div>
+          <div style="width: 18vw; height: 4vw">
+            <button
+              type="submit"
+              class="btn btn-default searcButton"
+              [disabled]="!SearchData.valid"
+              (click)="searchNewTrain()"
+            >
+              Search</button
+            ><br />
+          </div>
         </div>
-        <br>
-        <form class="tab red" [formGroup]="SearchData">
-            <div>
-                From Station: <input type="text" id="from" placeholder="Enter Source Station"
-                    formControlName="from"><br /><br />
-            </div>
-            <div>
-                To Station: &nbsp; &nbsp;&nbsp;<input type="text" id="to" placeholder="Enter Destination Station"
-                    formControlName="to"><br />
-            </div><br>
-            <div>
-                <label for="departure">Date:&nbsp;&nbsp;</label>
-                <input type="date" id="date" formControlName="date" min={{date}} required />
-            </div><br>
-            <button type="submit" class="btn btn-default" [disabled]="!SearchData.valid"(click)="searchNewTrain()">Search</button><br />
-        </form><br />
-        <div *ngIf="trains.length>0">
-            <table class="tab red">
-                <tr>
-                    <th>Train ID</th>
-                    <th>Train Name</th>
-                    <th>From</th>
-                    <th>TO</th>
-                    <th>Action</th>
-
-                </tr>
-                <tbody>
-                    <tr *ngFor='let t of trains'>
-                        <td>{{t._id}}</td>
-                        <td>{{t.train_name}}</td>
-                        <td>{{t.from}}</td>
-                        <td>{{t.to}}</td>
-                        <td><button class="btn btn-danger" (click)="updateTicket(t._id)">BOOK TICKET</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div *ngIf="trains.msg">
-            <div class="tab red"> no train available for this route</div>
-        </div>
-    </body>
+      </form>
+    </div>
+    <div *ngIf="trains.length > 0">
+      <div class="searchTable">
+        <div class="search2">Here are some result....</div>
+        <table>
+          <tr>
+            <th>Train ID</th>
+            <th>Train Name</th>
+            <th>From</th>
+            <th>TO</th>
+            <th>Action</th>
+          </tr>
+          <tbody>
+            <tr *ngFor="let t of trains">
+              <td>{{ t._id }}</td>
+              <td>{{ t.train_name }}</td>
+              <td>{{ t.from }}</td>
+              <td>{{ t.to }}</td>
+              <td>
+                <button class="btn btn-danger" (click)="updateTicket(t._id)">
+                  BOOK TICKET
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="trains.msg">
+      <div class="searchTable">
+        <div class="tab">No train available for this route</div>
+      </div>
+    </div>
+  </div>
 </div>
