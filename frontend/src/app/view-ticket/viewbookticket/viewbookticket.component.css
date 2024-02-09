@@ -43,12 +43,15 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto 2vw;
-    height: 200px;
+    /* height: 200px; */
     margin-top: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
   .searchTable {
     border-radius: 15px;
     width: 80vw;
+    height: 300px;
     background-color: #fff;
     box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15), -1px -1px 6px rgba(0, 0, 0, 0.06);
     position: relative;
@@ -166,5 +169,14 @@
     margin-top: -10px;
     float: left;
     margin-left: 20px;
+  }
+  .formtest{
+    overflow-x: hidden;
+    height: 250px;
+    width: 75vw;
+    overflow-y: scroll;
+  }
+  ::-webkit-scrollbar-track {
+    display: none;
   }
   

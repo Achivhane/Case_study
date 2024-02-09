@@ -1,39 +1,25 @@
+
 <div class="search1">View Ticket</div>
 <div *ngIf="ticket.length > 0">
   <div class="searchTable">
-    <div class="search2">Here are some result....</div>
+    <div class="formtest">
     <table>
       <tr>
         <th>Train Name</th>
         <th>From</th>
         <th>TO</th>
-        <th>Date</th>
-        <th>Arrival Time</th>
-        <th>Departure Time</th>
-        <!-- <th>Fare</th> -->
-        <!-- <th>Delete</th> -->
+        <th>Fare</th>
       </tr>
       <tbody>
         <tr *ngFor="let t of ticket">
           <td>{{ t.train_name }}</td>
           <td>{{ t.from }}</td>
           <td>{{ t.to }}</td>
-          <td>{{ t.date | date }}</td>
-          <td>{{ t.arrival_time }}</td>
-          <td>{{ t.departure_time }}</td>
-          <!-- <td>{{ t.fare }}</td> -->
-          <!-- <td>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    (click)="deleteTrain(t._id)"
-                  >
-                    Delete
-                  </button>
-                </td> -->
+          <td>{{ t.fare }}</td>
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
 </div>
 <div *ngIf="!ticket.length">
