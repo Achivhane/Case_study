@@ -7,10 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-home.component.css']
 })
 export class AdminHomeComponent implements OnInit {
-
-  constructor(private router: Router) { }
+currentLocation = '';
+  constructor(private router: Router) {
+    this.currentLocation = window.location.href
+   }
 
   ngOnInit(): void {
+    // alert(this.currentLocation);
   }
   addTrainPage() {
     this.router.navigate(['addtrain'])

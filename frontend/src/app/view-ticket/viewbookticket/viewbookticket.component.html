@@ -1,25 +1,24 @@
-
 <div class="search1">View Ticket</div>
 <div *ngIf="ticket.length > 0">
   <div class="searchTable">
     <div class="formtest">
-    <table>
-      <tr>
-        <th>Train Name</th>
-        <th>From</th>
-        <th>TO</th>
-        <th>Fare</th>
-      </tr>
-      <tbody>
-        <tr *ngFor="let t of ticket">
-          <td>{{ t.train_name }}</td>
-          <td>{{ t.from }}</td>
-          <td>{{ t.to }}</td>
-          <td>{{ t.fare }}</td>
+      <table>
+        <tr>
+          <th>Train Name</th>
+          <th>From</th>
+          <th>TO</th>
+          <th>Fare</th>
         </tr>
-      </tbody>
-    </table>
-  </div>
+        <tbody>
+          <tr *ngFor="let t of ticket">
+            <td>{{ t.train_name }}</td>
+            <td>{{ t.from }}</td>
+            <td>{{ t.to }}</td>
+            <td>{{ t.fare }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <div *ngIf="!ticket.length">
@@ -27,10 +26,14 @@
     <div class="tab">No train available for this route</div>
   </div>
 </div>
-<div class="from2">
+<div class="from2" >
   <div style="width: 18vw; height: 4vw">
-    <button type="submit" class="btn btn-primary home" routerLink="/search"
-    routerLinkActive="active">
+    <button
+      type="submit"
+      class="btn btn-primary home"
+      routerLink="/search"
+      routerLinkActive="active"
+    >
       Back To Home
     </button>
   </div>

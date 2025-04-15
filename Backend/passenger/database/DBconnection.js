@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 //name of the database
-const mongodbURL='mongodb+srv://admin:admin@cluster0.d36b8.mongodb.net/RailWays?retryWrites=true&w=majority'
+const mongodbURL='mongodb+srv://admin:admin@cluster0.lphttf9.mongodb.net/Railways?retryWrites=true&w=majority'
 
 try{
     //connect to mongodb 

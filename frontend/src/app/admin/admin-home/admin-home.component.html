@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <body>
+  <!-- <body>
     <header>
       <div class="home">
         <h1>Please Click Below button</h1>
@@ -8,12 +8,63 @@
         &nbsp;
         <button id="submit" class="btn" type="submit" (click)="addTrainPage()">Add Train</button>
         &nbsp;
-        <button id="submit" class="btn" type="submit" (click)="viewTrainPage()">View Train</button>
+        <button id="submit" class="btn" type="submit" (click)="viewTrainPage()">View Train</button> -->
         <!-- &nbsp;
         <button id="submit" class="btn" type="submit" (click)=" bookedTicketPage()">Book Tickets</button> -->
-        &nbsp;
+        <!-- &nbsp;
         <button id="submit" class="btn" type="submit" routerLink="/login" routerLinkActive="active">Logout</button>
       </div>
     </header>
   </body>
-</div>
+</div> -->
+<div class="main">
+  <div class="search1">Please Click Below button</div>
+  <div class="search">
+    <form >
+      <div class="from">
+        <div class="serchItemBox">
+          <div class="searchItem">
+            <button
+            type="submit"
+            class="btn btn-default searcButton"
+            routerLink="/adminhome"
+          routerLinkActive="active"
+          >
+            Home</button
+          >
+          </div>
+        </div>
+        <div class="serchItemBox">
+          <div class="searchItem">
+            <button
+            type="submit"
+            class="btn btn-default searcButton"
+            (click)="addTrainPage()"
+          >
+            Add Train</button
+          >
+          </div>
+        </div>
+        <div class="serchItemBox">
+          <div class="searchItem">
+            <button
+            type="submit"
+            class="btn btn-default searcButton"
+            (click)="viewTrainPage()"
+          >
+            View Trains</button
+          >
+          </div>
+        </div>
+        <div style="width: 18vw; height: 4vw">
+          <button
+            type="submit"
+            class="btn btn-default searcButton"
+            routerLink="/login" routerLinkActive="active"
+          >
+          Logout</button
+          >
+        </div>
+      </div>
+    </form>
+  </div>

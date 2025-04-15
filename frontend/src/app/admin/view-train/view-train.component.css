@@ -12,6 +12,7 @@ body{
    background-repeat: no-repeat;
    margin-left: 0%;
    margin-right: 0%;
+   background-size: 1300px 600px;
    position: relative;
       margin: 30px auto;
       padding: 20px 20px 20px;
@@ -23,3 +24,4 @@ body{
     border-radius: 10px;
     background: #43C6DB;
   }
+ 

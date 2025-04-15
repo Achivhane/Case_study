@@ -106,7 +106,8 @@ router.post("/users/registration", expressAsyncHandler(async (req,res)=>{
     const user = new Passenger({
         name : req.body.name,
         email : req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        userType: req.body.userType,
     });
     try{
         const createdUser = await user.save();
@@ -114,13 +115,13 @@ router.post("/users/registration", expressAsyncHandler(async (req,res)=>{
             _id :  createdUser._id,
             name : createdUser.name,
             email : createdUser.email,
+            user : createdUser.userType,
             msg :"success",
             token : generateToken(createdUser)
         })
     }catch(error){
         res.status(200).json({
-            msg :"Error",
-            token : generateToken(createdUser)
+            msg :"Error"
         })
         console.log("exception occured in registration ",error)
     }
@@ -150,8 +151,6 @@ router.post("/users/registration", expressAsyncHandler(async (req,res)=>{
 router.post("/users/signin",expressAsyncHandler(async (req,res)=>{
     const user = await Passenger.findOne({"email":req.body.email});
     console.log(user);
-    console.log(" req.body.password"+req.body.password);
-    console.log(" req.body.password"+req.body.password);
     if(user){
         if(req.body.password===user.password){
             console.log("into this")

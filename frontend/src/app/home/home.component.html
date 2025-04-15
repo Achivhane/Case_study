@@ -1,22 +1,72 @@
-<body>
-    <section class="banner" id="top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="left-side">
-                        <div class="tabs-content">
-                            <h4>Choose Your Direction:</h4>
-                            <ul class="social-links">
-                                <li><a href="http://facebook.com" routerLink="/login" routerLinkActive="active"><em>Login Here</em><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="http://youtube.com"routerLink="/register" routerLinkActive="active"><em>Register Here</em><i class="fa fa-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="page-direction-button">
-                            <a href="contact.html"routerLink="/contact" routerLinkActive="active"><i class="fa fa-phone"></i>Contact Us Now</a>
-                        </div>
-                    </div>
-                </div>
+<!-- <body>
+  <section class="banner" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="left-side">
+            <div class="tabs-content">
+              <h4>Choose Your Direction:</h4>
+              <ul class="social-links">
+                <li>
+                  <a
+                    href="http://facebook.com"
+                    routerLink="/login"
+                    routerLinkActive="active"
+                    ><em>Login Here</em><i class="fa fa-facebook"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="http://youtube.com"
+                    routerLink="/register"
+                    routerLinkActive="active"
+                    ><em>Register Here</em><i class="fa fa-youtube"></i
+                  ></a>
+                </li>
+              </ul>
             </div>
+            <div class="page-direction-button">
+              <a
+                href="contact.html"
+                routerLink="/contact"
+                routerLinkActive="active"
+                ><i class="fa fa-phone"></i>Contact Us Now</a
+              >
+            </div>
+          </div>
         </div>
-    </section>
-</body>
+      </div>
+    </div>
+  </section>
+</body> -->
+<div class="main">
+  <div class="search1">Choose Your Direction:</div>
+  <div class="search">
+    <form >
+      <div class="from">
+        <div class="serchItemBox">
+          <div class="searchItem">
+            <button
+              type="submit"
+              class="btn btn-default searcButton"
+              (click)="login()"
+            >
+            Login Here</button
+            >
+          </div>
+        </div>
+        <div class="serchItemBox">
+          <div class="searchItem">
+            <button
+              type="submit"
+              class="btn btn-default searcButton"
+              (click)="register()"
+            >
+            Register Here</button
+            >
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

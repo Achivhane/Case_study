@@ -7,8 +7,12 @@
 	color: #ffe165;
     color: #fff;
 	font-size: 12px;
-	margin-top: 40px;
+	/* margin-top: 40px; */
 }
 nav{
     height:60px;
+}
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: #1f3646;
 }

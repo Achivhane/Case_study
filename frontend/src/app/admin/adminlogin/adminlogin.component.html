@@ -1,4 +1,4 @@
-<body>
+<!-- <body>
     <div class="login">
         <div class="card-header">
             <h1><b>Login</b></h1>
@@ -29,4 +29,62 @@
             </form>
         </div>
     </div>
-</body>
+</body> -->
+
+<div class="search1">Login</div>
+<div class="search">
+  <form id="needs-validation">
+    <div class="from">
+      <div class="serchItemBox">
+        <div class="searchItem">
+          <div class="form-group">
+            <label for="InputEmail">Email address</label>
+            <input
+              type="email"
+              id="username"
+              name="username"
+              [(ngModel)]="username"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="someone@something.com"
+              required="required"
+            />
+
+            <small id="emailHelp" class="form-text text-muted"></small>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+      </div>
+      <div class="serchItemBox">
+        <div class="searchItem">
+          <div class="form-group">
+            <label for="InputPassword">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              class="form-control"
+              placeholder="Password"
+              required="required"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+      </div>
+	  <div class="feedback invalid" *ngIf="!valid">
+		<p class="errorDetect">Incorrect e-mail or password.</p>
+	  </div>
+      <div class="signIn">
+        <button
+          type="button"
+          id="signin"
+          class="btn btn-primary"
+          (click)="onSubmit()"
+        >
+          Sign In
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
